@@ -91,6 +91,8 @@
 //  see: https://github.com/azerothcore/azerothcore-wotlk/issues/9766
 #include "GridNotifiersImpl.h"
 
+#include "item_reforge.h"
+
 enum CharacterFlags
 {
     CHARACTER_FLAG_NONE                 = 0x00000000,
@@ -6553,6 +6555,15 @@ void Player::_ApplyItemBonuses(ItemTemplate const* proto, uint8 slot, bool apply
     if (only_level_scale && !ssv)
         return;
 
+    uint32 statCount = proto->StatsCount;
+    const ItemReforge::ReforgingData* reforging = nullptr;
+    if (Item* item = GetItemByPos(INVENTORY_SLOT_BAG_0, slot))
+    {
+        reforging = sItemReforge->GetReforgingData(item);
+        if (reforging != nullptr)
+            statCount++;
+    }
+
     for (uint8 i = 0; i < MAX_ITEM_PROTO_STATS; ++i)
     {
         uint32 statType = 0;
@@ -6579,11 +6590,30 @@ void Player::_ApplyItemBonuses(ItemTemplate const* proto, uint8 slot, bool apply
         }
         else
         {
-            if (i >= proto->StatsCount)
+            if (i >= statCount)
                 continue;
 
-            statType = proto->ItemStat[i].ItemStatType;
-            val = proto->ItemStat[i].ItemStatValue;
+            if (reforging == nullptr)
+            {
+                statType = proto->ItemStat[i].ItemStatType;
+                val = proto->ItemStat[i].ItemStatValue;
+            }
+            else
+            {
+                if (i == statCount - 1)
+                {
+                    statType = reforging->stat_increase;
+                    val = reforging->stat_value;
+                }
+                else
+                {
+                    statType = proto->ItemStat[i].ItemStatType;
+                    val = proto->ItemStat[i].ItemStatValue;
+
+                    if (statType == reforging->stat_decrease)
+                        val -= reforging->stat_value;
+                }
+            }
         }
 
         if (val == 0)
