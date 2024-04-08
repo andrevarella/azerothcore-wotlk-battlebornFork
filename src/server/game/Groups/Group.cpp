@@ -1982,6 +1982,14 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const* 
         if (bgTemplate->GetBgTypeID() == BATTLEGROUND_RB && member->InBattlegroundQueue())
             return ERR_IN_NON_RANDOM_BG;
 
+        /* 
+        // Nao deixa joinar x5 (3v3 solo) em grupo [talvez nao precisa, ja tem disable em criar x5/invitar pro x5]
+        if (bgTemplate->GetBgTypeID() == ARENA_TYPE_5v5 && isRated)
+        {
+            member->GetSession()->SendNotification("5v5 rated arena is disabled.");
+            return ERR_BATTLEGROUND_JOIN_FAILED;
+        }*/
+
         // don't let Death Knights join BG queues when they are not allowed to be teleported yet
         if (member->IsClass(CLASS_DEATH_KNIGHT, CLASS_CONTEXT_TELEPORT) && member->GetMapId() == 609 && !member->IsGameMaster() && !member->HasSpell(50977))
             return ERR_GROUP_JOIN_BATTLEGROUND_FAIL;

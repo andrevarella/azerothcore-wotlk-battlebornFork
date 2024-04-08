@@ -622,7 +622,7 @@ uint8 ArenaTeam::GetSlotByType(uint32 type)
     auto const& itr = ArenaSlotByType.find(type);
     if (itr == ArenaSlotByType.end())
     {
-        LOG_ERROR("bg.arena", "Unknown arena team type {} for some arena team", type);
+        LOG_ERROR("bg.arena", "Unknown arena team type {} for some arena team", type); // da esse erro 3 vezes apos matar alguem em solo 3v3
         return slot;
     }
 
@@ -1034,24 +1034,11 @@ void ArenaTeam::CreateTempArenaTeam(std::vector<Player*> playerList, uint8 type,
 {
     auto playerCountInTeam = static_cast<uint32>(playerList.size());
 
-    const auto standardArenaType = { ARENA_TYPE_2v2, ARENA_TYPE_3v3/*, ARENA_TYPE_5v5*/ };
+    // solo queue 3v3 - times que nao sao o standard, nao começam a arena enqnt tiverem no queue
+    const auto standardArenaType = { ARENA_TYPE_2v2, ARENA_TYPE_3v3/*, ARENA_TYPE_5v5*/ }; // fix crash Solo Queue
     bool isStandardArenaType = std::find(std::begin(standardArenaType), std::end(standardArenaType), type) != std::end(standardArenaType);
     if (isStandardArenaType)
         ASSERT(playerCountInTeam == GetReqPlayersForType(type));
-
-    /*
-    if (type == ARENA_TYPE_2v2)
-    {
-        ASSERT(playerCountInTeam == 2);
-    }
-    else if (type == ARENA_TYPE_3v3)
-    {
-        ASSERT(playerCountInTeam == 3);
-    }
-    if (type == ARENA_TYPE_2v2)
-    {
-        ASSERT(playerCountInTeam == 2);
-    }*/
 
     // Generate new arena team id
     TeamId = sArenaTeamMgr->GenerateTempArenaTeamId();
@@ -1112,5 +1099,5 @@ std::unordered_map<uint8, uint8> ArenaTeam::ArenaReqPlayersForType =
 {
     { ARENA_TYPE_2v2, 4},
     { ARENA_TYPE_3v3, 6},
-    { ARENA_TYPE_5v5, 10}
+    { ARENA_TYPE_5v5, 10}, // acho que muda a quantidade de players pra clickar no cristal
 };

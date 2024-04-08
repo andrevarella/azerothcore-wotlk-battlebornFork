@@ -119,6 +119,12 @@ void WorldSession::HandleArenaTeamInviteOpcode(WorldPacket& recvData)
         return;
     }
 
+    if (arenaTeam && arenaTeam->GetType() == ARENA_TYPE_5v5)
+    {
+        SendNotification("You cannot invite players to your Solo Queue team.");
+        return;
+    }
+
     if (GetPlayer()->GetArenaTeamId(arenaTeam->GetSlot()) != arenaTeamId)
     {
         SendArenaTeamCommandResult(ERR_ARENA_TEAM_CREATE_S, "", "", ERR_ARENA_TEAM_PERMISSIONS);

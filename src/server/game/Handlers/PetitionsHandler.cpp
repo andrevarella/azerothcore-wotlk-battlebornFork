@@ -110,10 +110,14 @@ void WorldSession::HandlePetitionBuyOpcode(WorldPacket& recvData)
                 type = ARENA_TEAM_CHARTER_3v3_TYPE;
                 break;
             case 3:
+                SendNotification("5v5 rated arena is disabled.");
+                return;
+                break;
+                /*
                 charterid = ARENA_TEAM_CHARTER_5v5;
                 cost = sWorld->getIntConfig(CONFIG_CHARTER_COST_ARENA_5v5);
-                type = ARENA_TEAM_CHARTER_5v5_TYPE;
-                break;
+                type = ARENA_TEAM_CHARTER_5v5_TYPE;*/
+            
             default:
                 LOG_DEBUG("network", "unknown selection at buy arena petition: {}", clientIndex);
                 return;
