@@ -622,7 +622,7 @@ uint8 ArenaTeam::GetSlotByType(uint32 type)
     auto const& itr = ArenaSlotByType.find(type);
     if (itr == ArenaSlotByType.end())
     {
-        LOG_ERROR("bg.arena", "Unknown arena team type {} for some arena team", type); // da esse erro 3 vezes apos matar alguem em solo 3v3
+        //LOG_ERROR("bg.arena", "Unknown arena team type {} for some arena team", type); // da esse erro 3 vezes apos matar alguem em solo 3v3
         return slot;
     }
 
@@ -1099,5 +1099,5 @@ std::unordered_map<uint8, uint8> ArenaTeam::ArenaReqPlayersForType =
 {
     { ARENA_TYPE_2v2, 4},
     { ARENA_TYPE_3v3, 6},
-    { ARENA_TYPE_5v5, 10}, // acho que muda a quantidade de players pra clickar no cristal
+    { ARENA_TYPE_5v5, 10}, // n precisa aparentemente
 };

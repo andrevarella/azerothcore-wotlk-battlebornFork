@@ -1096,6 +1096,10 @@ void BattlegroundQueue::SendJoinMessageArenaQueue(Player* leader, GroupQueueInfo
     if (!sScriptMgr->OnBeforeSendJoinMessageArenaQueue(this, leader, ginfo, bracketEntry, isRated))
         return;
 
+    // solo queue (prevent spam)
+    if (ginfo->ArenaType == 4)
+        return;
+
     if (!isRated)
     {
         Battleground* bg = sBattlegroundMgr->GetBattlegroundTemplate(ginfo->BgTypeId);
@@ -1181,6 +1185,10 @@ void BattlegroundQueue::SendExitMessageArenaQueue(GroupQueueInfo* ginfo)
         return;
 
     if (!ginfo->IsRated)
+        return;
+
+    // solo queue (prevent spam)
+    if (ginfo->ArenaType == 4)
         return;
 
     uint8 ArenaType = ginfo->ArenaType;

@@ -6560,11 +6560,21 @@ SpellCastResult Spell::CheckCast(bool strict)
             case SPELL_EFFECT_TALENT_SPEC_SELECT:
                 if (!sScriptMgr->CanSelectSpecTalent(this))
                     return SPELL_FAILED_DONT_REPORT;
+
                 // can't change during already started arena/battleground
                 if (m_caster->GetTypeId() == TYPEID_PLAYER)
+                {
+                    Player* plr = m_caster->ToPlayer();
+                    if (plr->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5))
+                    {
+                        plr->GetSession()->SendAreaTriggerMessage("You can't change your talents while in queue for 1v1 or 3v3.");
+                        return SPELL_FAILED_DONT_REPORT;
+                    }
                     if (Battleground const* bg = m_caster->ToPlayer()->GetBattleground())
                         if (bg->GetStatus() == STATUS_IN_PROGRESS)
                             return SPELL_FAILED_NOT_IN_BATTLEGROUND;
+                }
+
                 break;
             default:
                 break;
