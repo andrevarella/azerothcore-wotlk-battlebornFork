@@ -1116,6 +1116,7 @@ public:
     {
         LOG_INFO("server.loading", "Re-Loading NPC Text Locale ... ");
         sObjectMgr->LoadNpcTextLocales();
+        sObjectMgr->LoadGossipText();
         handler->SendGlobalGMSysMessage("DB table `npc_text_locale` reloaded.");
         return true;
     }
