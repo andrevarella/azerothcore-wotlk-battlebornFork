@@ -103,7 +103,7 @@ void ItemReforge::LoadFromDB()
 std::string ItemReforge::GetSlotIcon(uint8 slot, uint32 width, uint32 height, int x, int y) const
 {
     std::ostringstream ss;
-    ss << "|TInterface/PaperDoll/";
+    ss << " |TInterface/PaperDoll/";
     switch (slot)
     {
         case EQUIPMENT_SLOT_HEAD:
@@ -115,11 +115,17 @@ std::string ItemReforge::GetSlotIcon(uint8 slot, uint32 width, uint32 height, in
         case EQUIPMENT_SLOT_SHOULDERS:
             ss << "UI-PaperDoll-Slot-Shoulder";
             break;
-        case EQUIPMENT_SLOT_BODY:
-            ss << "UI-PaperDoll-Slot-Shirt";
+        case EQUIPMENT_SLOT_BACK:
+            ss << "UI-PaperDoll-Slot-Chest";
             break;
         case EQUIPMENT_SLOT_CHEST:
             ss << "UI-PaperDoll-Slot-Chest";
+            break;
+        case EQUIPMENT_SLOT_WRISTS:
+            ss << "UI-PaperDoll-Slot-Wrists";
+            break;
+        case EQUIPMENT_SLOT_HANDS:
+            ss << "UI-PaperDoll-Slot-Hands";
             break;
         case EQUIPMENT_SLOT_WAIST:
             ss << "UI-PaperDoll-Slot-Waist";
@@ -130,12 +136,6 @@ std::string ItemReforge::GetSlotIcon(uint8 slot, uint32 width, uint32 height, in
         case EQUIPMENT_SLOT_FEET:
             ss << "UI-PaperDoll-Slot-Feet";
             break;
-        case EQUIPMENT_SLOT_WRISTS:
-            ss << "UI-PaperDoll-Slot-Wrists";
-            break;
-        case EQUIPMENT_SLOT_HANDS:
-            ss << "UI-PaperDoll-Slot-Hands";
-            break;
         case EQUIPMENT_SLOT_FINGER1:
         case EQUIPMENT_SLOT_FINGER2:
             ss << "UI-PaperDoll-Slot-Finger";
@@ -144,9 +144,6 @@ std::string ItemReforge::GetSlotIcon(uint8 slot, uint32 width, uint32 height, in
         case EQUIPMENT_SLOT_TRINKET2:
             ss << "UI-PaperDoll-Slot-Trinket";
             break;     
-        case EQUIPMENT_SLOT_BACK:
-            ss << "UI-PaperDoll-Slot-Chest";
-            break;
         case EQUIPMENT_SLOT_MAINHAND:
             ss << "UI-PaperDoll-Slot-MainHand";
             break;
@@ -155,6 +152,9 @@ std::string ItemReforge::GetSlotIcon(uint8 slot, uint32 width, uint32 height, in
             break;
         case EQUIPMENT_SLOT_RANGED:
             ss << "UI-PaperDoll-Slot-Ranged";
+            break;
+        case EQUIPMENT_SLOT_BODY:
+            ss << "UI-PaperDoll-Slot-Shirt";
             break;
         case EQUIPMENT_SLOT_TABARD:
             ss << "UI-PaperDoll-Slot-Tabard";
@@ -172,45 +172,45 @@ std::string ItemReforge::GetSlotName(uint8 slot) const
     switch (slot)
     {
         case EQUIPMENT_SLOT_HEAD:
-            return "Head";
+            return " Head";
         case EQUIPMENT_SLOT_NECK:
-            return "Neck";
+            return " Neck";
         case EQUIPMENT_SLOT_SHOULDERS:
-            return "Shoulders";
-        case EQUIPMENT_SLOT_BODY:
-            return "Shirt";
-        case EQUIPMENT_SLOT_CHEST:
-            return "Chest";
-        case EQUIPMENT_SLOT_WAIST:
-            return "Waist";
-        case EQUIPMENT_SLOT_LEGS:
-            return "Legs";
-        case EQUIPMENT_SLOT_FEET:
-            return "Feet";
-        case EQUIPMENT_SLOT_WRISTS:
-            return "Wrists";
-        case EQUIPMENT_SLOT_HANDS:
-            return "Hands";
-        case EQUIPMENT_SLOT_FINGER1:
-            return "Finger 1";
-        case EQUIPMENT_SLOT_FINGER2:
-            return "Finger 2";
-        case EQUIPMENT_SLOT_TRINKET1:
-            return "Trinket 1";
-        case EQUIPMENT_SLOT_TRINKET2:
-            return "Trinket 2";
+            return " Shoulders";
         case EQUIPMENT_SLOT_BACK:
-            return "Back";
+            return " Back";
+        case EQUIPMENT_SLOT_CHEST:
+            return " Chest";
+        case EQUIPMENT_SLOT_WRISTS:
+            return " Wrists";
+        case EQUIPMENT_SLOT_HANDS:
+            return " Hands";
+        case EQUIPMENT_SLOT_WAIST:
+            return " Waist";
+        case EQUIPMENT_SLOT_LEGS:
+            return " Legs";
+        case EQUIPMENT_SLOT_FEET:
+            return " Feet";
+        case EQUIPMENT_SLOT_FINGER1:
+            return " Finger 1";
+        case EQUIPMENT_SLOT_FINGER2:
+            return " Finger 2";
         case EQUIPMENT_SLOT_MAINHAND:
-            return "Main Hand";
+            return " Main Hand";
         case EQUIPMENT_SLOT_OFFHAND:
-            return "Off Hand";
+            return " Off Hand";
         case EQUIPMENT_SLOT_RANGED:
-            return "Ranged";
+            return " Ranged";
+        case EQUIPMENT_SLOT_TRINKET1:
+            return " Trinket 1";
+        case EQUIPMENT_SLOT_TRINKET2:
+            return " Trinket 2";
+        case EQUIPMENT_SLOT_BODY:
+            return " Shirt";
         case EQUIPMENT_SLOT_TABARD:
-            return "Tabard";
+            return " Tabard";
         default:
-            return "Unknown";
+            return " Unknown";
     }
 }
 

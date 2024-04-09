@@ -83,7 +83,7 @@ public:
     static void SendMessage(Player* player, const std::string& message);
     static std::string TextRed(const std::string& text);
     static std::string TextGreen(const std::string& text);
-    static std::string ItemIcon(const ItemTemplate* proto, uint32 width = 30, uint32 height = 30, int x = 0, int y = 0);
+    static std::string ItemIcon(const ItemTemplate* proto, uint32 width = 20, uint32 height = 20, int x = 0, int y = 0);
     static std::string ItemNameWithLocale(const Player* player, const ItemTemplate* itemTemplate, int32 randomPropertyId);
     static std::string ItemLink(const Player* player, const ItemTemplate* itemTemplate, int32 randomPropertyId);
     static std::string ItemLinkForUI(const Item* item, const Player* player);
