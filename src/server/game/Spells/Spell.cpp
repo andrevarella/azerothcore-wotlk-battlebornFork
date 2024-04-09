@@ -6567,7 +6567,7 @@ SpellCastResult Spell::CheckCast(bool strict)
                     Player* plr = m_caster->ToPlayer();
                     if (plr->InBattlegroundQueueForBattlegroundQueueType(BATTLEGROUND_QUEUE_5v5))
                     {
-                        plr->GetSession()->SendAreaTriggerMessage("You can't change your talents while in queue for 1v1 or 3v3.");
+                        plr->GetSession()->SendAreaTriggerMessage("You can't change your talents while in queue for 3v3 Solo Queue.");
                         return SPELL_FAILED_DONT_REPORT;
                     }
                     if (Battleground const* bg = m_caster->ToPlayer()->GetBattleground())
