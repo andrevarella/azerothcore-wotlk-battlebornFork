@@ -214,6 +214,9 @@ public:
     // After an item has been equipped
     virtual void OnEquip(Player* /*player*/, Item* /*it*/, uint8 /*bag*/, uint8 /*slot*/, bool /*update*/) { }
 
+    // After an item has been unequipped
+    virtual void OnUnEquip(Player* /*player*/, Item* /*it*/, uint8 /*slot*/, bool /*update*/) { }
+
     // After player enters queue for BG
     virtual void OnPlayerJoinBG(Player* /*player*/) { }
 
