@@ -6842,8 +6842,8 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
         case 47996: // Warlock - Pet - Felguard's intercept
         case 47995: // Warlock - Pet - Felguard intercept trigg.
         case 58861: // Shaman - Feral bash
-        case 1330:  // Rogue - Garote silence
-            /*case 1833: // Rogue - CheapShot
+            /*case 1330:  // Rogue - Garote silence // Bug - rogue sai do stealth mas tem delay para dar o silence, fazendo com que de para dar CC no rogue (priest spamar fear ao receber garrote)
+            case 1833: // Rogue - CheapShot
                 case 9005: // Druid - Pounce R1
                 case 9823: // Pounce R2
                 case 9827: // Pounce R3
