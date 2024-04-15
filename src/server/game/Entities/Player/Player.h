@@ -1785,7 +1785,7 @@ public:
 
     void ResetCooldownsPortaArena(bool removeActivePetCooldowns = true);
     void ResetPlayersRaidSpellCooldowns(bool removeActivePetCooldowns = true); 
-    void ResetPlayerCDonDeath(bool removeActivePetCooldowns = true);
+    void ResetPlayerCDonDeath(bool removeActivePetCooldowns = true); 
 
     void RemoveAllSpellCooldown();
     void _LoadSpellCooldowns(PreparedQueryResult result);
