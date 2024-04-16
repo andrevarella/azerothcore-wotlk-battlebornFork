@@ -1758,8 +1758,8 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta
     if (unitTarget)
     {
         // xinef: spells cannot be cast if player is in fake combat also
-        if (AttributesEx & SPELL_ATTR1_ONLY_PEACEFUL_TARGETS && (unitTarget->IsInCombat() || unitTarget->IsPetInCombat()))
-            return SPELL_FAILED_TARGET_AFFECTING_COMBAT;
+        //if (AttributesEx & SPELL_ATTR1_ONLY_PEACEFUL_TARGETS && (unitTarget->IsInCombat() || unitTarget->IsPetInCombat()))
+        //    return SPELL_FAILED_TARGET_AFFECTING_COMBAT;
 
         // only spells with SPELL_ATTR3_ONLY_ON_GHOSTS can target ghosts
         if (((IsRequiringDeadTarget() != 0) != unitTarget->HasAuraType(SPELL_AURA_GHOST)) && !(IsDeathPersistent() && IsAllowingDeadTarget()))
