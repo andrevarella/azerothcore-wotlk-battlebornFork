@@ -3630,16 +3630,19 @@ void Player::ResetPlayersRaidSpellCooldowns(bool removeActivePetCooldowns)
     if (removeActivePetCooldowns)
         if (Pet* pet = GetPet())
         {
-            // notify player
-            for (CreatureSpellCooldowns::const_iterator itr2 = pet->m_CreatureSpellCooldowns.begin(); itr2 != pet->m_CreatureSpellCooldowns.end(); ++itr2)
-                SendClearCooldown(itr2->first, pet);
+            if (pet && pet->IsInWorld())
+            {
+                // notify player
+                for (CreatureSpellCooldowns::const_iterator itr2 = pet->m_CreatureSpellCooldowns.begin(); itr2 != pet->m_CreatureSpellCooldowns.end(); ++itr2)
+                    SendClearCooldown(itr2->first, pet);
 
-            // actually clear cooldowns
-            pet->m_CreatureSpellCooldowns.clear();
+                // actually clear cooldowns
+                pet->m_CreatureSpellCooldowns.clear();
+            }
         }
 }
 
-// Apenas para o Mod DungeonRespawn
+// Apenas para o Mod DungeonRespawn // remover depois?
 void Player::ResetPlayerCDonDeath(bool removeActivePetCooldowns)
 {
     uint32 infTime = GameTime::GetGameTimeMS().count() + infinityCooldownDelayCheck;
@@ -3656,12 +3659,15 @@ void Player::ResetPlayerCDonDeath(bool removeActivePetCooldowns)
     if (removeActivePetCooldowns)
         if (Pet* pet = GetPet())
         {
-            // notify player
-            for (CreatureSpellCooldowns::const_iterator itr2 = pet->m_CreatureSpellCooldowns.begin(); itr2 != pet->m_CreatureSpellCooldowns.end(); ++itr2)
-                SendClearCooldown(itr2->first, pet);
+            if (pet && pet->IsInWorld())
+            {
+                // notify player
+                for (CreatureSpellCooldowns::const_iterator itr2 = pet->m_CreatureSpellCooldowns.begin(); itr2 != pet->m_CreatureSpellCooldowns.end(); ++itr2)
+                    SendClearCooldown(itr2->first, pet);
 
-            // actually clear cooldowns
-            pet->m_CreatureSpellCooldowns.clear();
+                // actually clear cooldowns
+                pet->m_CreatureSpellCooldowns.clear();
+            }
         }
 }
 
