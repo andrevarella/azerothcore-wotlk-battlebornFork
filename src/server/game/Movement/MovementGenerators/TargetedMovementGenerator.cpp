@@ -314,10 +314,11 @@ static Optional<float> GetVelocity(Unit* owner, Unit* target, G3D::Vector3 const
         speed = target->GetSpeed(moveType);
         if (playerPet)
         {
-            float distance = owner->GetDistance2d(dest.x, dest.y) - target->GetObjectSize() - (*speed / 2.f);
+            float distance = owner->GetDistance2d(dest.x, dest.y) - target->GetObjectSize() - (*speed / 0.11f);//(*speed / 2.f);
             if (distance > 0.f)
             {
-                float multiplier = 1.f + (distance / 10.f);
+                float multiplier = 0.45f + (distance / 20.f);
+                //float multiplier = 1.f + (distance / 10.f);
                 *speed *= multiplier;
             }
         }
