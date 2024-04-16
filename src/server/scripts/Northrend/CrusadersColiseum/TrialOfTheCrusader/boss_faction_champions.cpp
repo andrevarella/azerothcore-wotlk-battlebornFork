@@ -128,6 +128,17 @@ struct boss_faction_championsAI : public ScriptedAI
     {
         if( pInstance && mAIType != AI_PET )
             pInstance->SetData(TYPE_FACTION_CHAMPIONS, DONE);
+
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(57723);  // Sated
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(57724);  // Sated
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(41425);  // Hipothermia
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(66233);  // Ardent Defender
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(25771);  // Forbearance
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(61987);  // Avenging Wrath Marker
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(79503);  // Custom - Reincarnation
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(79500);  // Custom - Cheated Death
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(79501);  // Custom - Forbearance
+        pInstance->DoRemoveAurasDueToSpellOnPlayersCD(79502);  // Custom - Nature's Guardian
     }
 
     void KilledUnit(Unit*  /*who*/) override

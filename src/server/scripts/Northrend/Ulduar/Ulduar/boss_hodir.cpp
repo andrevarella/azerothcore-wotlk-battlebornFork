@@ -219,6 +219,8 @@ public:
             if (!me->IsAlive())
                 if (pInstance)
                     pInstance->SetData(TYPE_HODIR, DONE);
+
+            // talvez aqui
         }
 
         InstanceScript* pInstance;

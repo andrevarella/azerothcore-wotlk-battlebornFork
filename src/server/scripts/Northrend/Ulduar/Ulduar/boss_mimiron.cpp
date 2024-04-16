@@ -287,6 +287,8 @@ public:
                 if (pInstance)
                     pInstance->SetData(TYPE_MIMIRON, DONE);
             bIsEvading = false;
+
+            // talvez aqui
         }
 
         InstanceScript* pInstance;

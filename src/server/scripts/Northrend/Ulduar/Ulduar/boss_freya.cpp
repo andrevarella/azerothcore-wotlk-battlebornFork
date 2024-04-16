@@ -359,6 +359,8 @@ public:
                     {
                         me->CastSpell(me, 65074, true); // credit
                         m_pInstance->SetData(TYPE_FREYA, DONE);
+
+                        // talvez aqui
                     }
                 }
             }
