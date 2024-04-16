@@ -7118,10 +7118,31 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                 {
                     // Victorious
                     case 32216:
-                        {
-                            RemoveAura(dummySpell->Id);
+                    {
+                         RemoveAura(dummySpell->Id);
+                         return false;
+                    }
+                    // Battleborn
+                    // Custom Rend (glyph ou bonus set) - ao usar mortal strike, aumenta duração do rend em 3s
+                    case 83266:
+                    {
+                        if (!target)
                             return false;
+
+                        // try to find Rend on the target
+                        if (AuraEffect const* aurEff = target->GetAuraEffect(SPELL_AURA_PERIODIC_DAMAGE, SPELLFAMILY_WARRIOR, 0x20, 0x0, 0x0, GetGUID()))
+                        {
+                            Aura* rend = aurEff->GetBase();
+                            int32 extraTime = 1 * aurEff->GetAmplitude(); // Aumenta a duração. 1 = quantidade de amplitude, 3s no caso do rend. (nao sei se stacka com Modifiers)
+                            //int32 extraTime = 3000; // 3 segundos em milissegundos
+                            rend->SetMaxDuration(rend->GetMaxDuration() + extraTime);
+                            rend->SetDuration(rend->GetDuration() + extraTime);
+
+                            return true;
                         }
+                        return false; // if not found Rend
+                    }
+                    break;
                 }
 
                 // Second Wind
