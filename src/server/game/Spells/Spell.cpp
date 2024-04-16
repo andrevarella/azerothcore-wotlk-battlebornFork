@@ -8267,6 +8267,36 @@ bool Spell::IsAutoActionResetSpell() const
         return false;
     }
 
+    // Battleborn:
+    // Druid - spells melee + wrath e starfire ligam auto attack timer, todas as outras n (cyclone castado etc)
+    //                                                                                  wrath                              starfire
+    if (m_spellInfo->SpellFamilyName == SPELLFAMILY_DRUID && m_spellInfo->SpellIconID != 263 && m_spellInfo->SpellIconID != 1485 && m_spellInfo->DmgClass != SPELL_DAMAGE_CLASS_MELEE)
+    {
+        return false;
+    }
+
+    // Shaman - soh lightning bolt reseta melee swing/auto attack timer (spells castadas com 1~5 stacks do Maelstrom Weapon n resetam o swing timer)
+    if (m_spellInfo->SpellFamilyName == SPELLFAMILY_SHAMAN && m_spellInfo->SpellIconID != 62)
+    {
+        return false;
+    }
+
+    // Warlock - todas spells, menos incinerate, sbolt, soulfire e chaos bolt  
+    if (m_spellInfo->SpellFamilyName == SPELLFAMILY_WARLOCK && m_spellInfo->SpellIconID != 2128 && m_spellInfo->SpellIconID != 213
+        && m_spellInfo->SpellIconID != 184 && m_spellInfo->SpellIconID != 3178)
+    {
+        return false;
+    }
+
+    // Paladin - soh holy light reseta melee swing timer
+    if (m_spellInfo->SpellFamilyName == SPELLFAMILY_PALADIN && m_spellInfo->SpellIconID != 70)
+    {
+        return false;
+    }
+
+    // if (m_spellInfo->SpellFamilyName == SPELLFAMILY_WARRIOR && m_spellInfo->SpellIconID != 999) - shattering throw?  || if (m_spellInfo->SpellFamilyName == SPELLFAMILY_HUNTER && m_spellInfo->SpellIconID != 999) scare beast/revive pet?
+    //if (m_spellInfo->SpellFamilyName == SPELLFAMILY_MAGE && m_spellInfo->SpellIconID != 999) ||  //if (m_spellInfo->SpellFamilyName == SPELLFAMILY_PRIEST && m_spellInfo->SpellIconID != 999)
+
     return true;
 }
 
