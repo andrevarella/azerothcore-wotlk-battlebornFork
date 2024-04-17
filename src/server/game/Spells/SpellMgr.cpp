@@ -3268,7 +3268,6 @@ void SpellMgr::LoadSpellInfoCustomAttributes()
             case 45150: // Meteor Slash
             case 64688: // Sonic Screech
             case 72373: // Shared Suffering
-            case 71904: // Chaos Bane
             case 70492: // Ooze Eruption
             case 72505: // Ooze Eruption
             case 72624: // Ooze Eruption
@@ -3279,6 +3278,12 @@ void SpellMgr::LoadSpellInfoCustomAttributes()
             case 66765: // Meteor Fists
             case 67333: // Meteor Fists
                 spellInfo->AttributesCu |= SPELL_ATTR0_CU_SHARE_DAMAGE;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
+                break;
+            case 71904: // Chaos Bane
+                spellInfo->AttributesCu |= SPELL_ATTR0_CU_SHARE_DAMAGE;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
+                spellInfo->AttributesCu |= SPELL_ATTR0_CU_DONT_BREAK_STEALTH;
                 break;
             case 18500: // Wing Buffet
             case 33086: // Wild Bite
