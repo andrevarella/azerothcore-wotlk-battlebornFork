@@ -3245,7 +3245,7 @@ void BattlegroundMap::InitVisibilityDistance()
     //init visibility distance for BG/Arenas
     m_VisibleDistance = World::GetMaxVisibleDistanceInBGArenas();
 
-    if (IsBattleArena()) // pussywizard: start with 30yd visibility range on arenas to ensure players can't get informations about the opponents in any way
+    if (IsBattleArena()) // pussywizard: start with 30yd visibility range on arenas to ensure players can't get informations about the opponents in any way 
         m_VisibleDistance = 30.0f;
 }
 
