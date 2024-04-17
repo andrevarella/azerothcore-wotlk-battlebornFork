@@ -1306,8 +1306,15 @@ void Battleground::ReadyMarkerClicked(Player* p)
     readyMarkerClickedSet.insert(p->GetGUID());
     uint32 count = readyMarkerClickedSet.size();
     uint32 req = ArenaTeam::GetReqPlayersForType(GetArenaType());
+
+    // Acc GM conta como 5
+    if (p->GetSession()->GetSecurity() >= SEC_GAMEMASTER)
+    {
+        count += 5;
+    }
+
     p->GetSession()->SendNotification("You are marked as ready %u/%u", count, req);
-    if (count == req)
+    if (count >= req)
     {
         m_Events |= BG_STARTING_EVENT_2;
         m_StartTime += GetStartDelayTime() - BG_START_DELAY_15S;
