@@ -2429,6 +2429,8 @@ void Unit::CalcAbsorbResist(DamageInfo& dmgInfo, bool Splited)
                 if (!caster->IsWithinLOSInMap(victim) || !caster->IsWithinDist(victim, splitSpellInfo->GetMaxRange(splitSpellInfo->IsPositive(), caster)))
                     continue;
 
+            //uint32 splitDamage2 = CalculatePct(dmgInfo.GetDamage(), (*itr)->GetAmount());
+
             // dano recebido do HoS / Divine Sac quebra Hungering Cold (quando ta com Absorb)
             switch ((*itr)->GetId())
             {
@@ -2439,6 +2441,12 @@ void Unit::CalcAbsorbResist(DamageInfo& dmgInfo, bool Splited)
                         caster->RemoveAura(51209);
                     }
                     break;
+                /*case 47809: // Shadowbolt - test
+                    if (splitDamage2 >= caster->GetMaxHealth() * 0.1)  // Verifica se o dano absorvido/recebido é igual a 10% do HP do player
+                    {
+                        caster->RemoveAura(6215);  // Remove a aura 6948 do caster
+                    }
+                    break;*/
 
                 default:
                     break;
