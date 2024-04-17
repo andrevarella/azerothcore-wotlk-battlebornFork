@@ -128,6 +128,17 @@ bool ArenaSpectator::HandleSpectatorSpectateCommand(ChatHandler* handler, std::s
                     case 25771: // forbearance
                     case 15007: // resurrection sickness
                     case 24755: // Tricked or Treated (z eventu)
+
+                    case 61987: // Server Side Forbearance (Avenging Wrath Marker) 
+                    case 61988: // Server Side Forbearance (Divine Shield Exclude Aura) 
+                    case 6788:  // Weakened Soul 
+                    case 41425: // Hipothermia 
+                    case 66233: // Ardent Defender
+                    case 11196: // Recently Bandaged
+                    case 79500: // (Custom) Cheat Death debuff
+                    case 79501: // (Custom) Forbearance debuff
+                    case 79502: // (Custom) Nature's Guardian debuff
+                    case 79503: // (Custom) Reincarnation debuff
                         continue;
                 }
 
