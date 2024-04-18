@@ -2337,7 +2337,8 @@ void Spell::prepareDataForTriggerSystem(AuraEffect const* /*triggeredByAura*/)
     if (m_spellInfo->SpellFamilyName == SPELLFAMILY_HUNTER &&
             (m_spellInfo->SpellFamilyFlags[0] & 0x18 ||              // Freezing and Frost Trap, Freezing Arrow
              m_spellInfo->Id == 57879 || m_spellInfo->Id == 45145 ||  // Snake Trap - done this way to avoid double proc
-             m_spellInfo->SpellFamilyFlags[2] & 0x00064000))          // Explosive and Immolation Trap
+             //m_spellInfo->SpellFamilyFlags[2] & 0x00064000))          // Explosive and Immolation Trap
+             m_spellInfo->Id == 83393 || m_spellInfo->SpellFamilyFlags[2] & 0x00064000))  // Explosive and Immolation Trap + Snake Trap Effect Custom 83393
     {
         m_procAttacker |= PROC_FLAG_DONE_TRAP_ACTIVATION;
     }
@@ -5996,8 +5997,8 @@ SpellCastResult Spell::CheckCast(bool strict)
                 return SPELL_FAILED_NOT_IN_ARENA;
 
 
-    // Novas Traps, Portals e Pedra de Warlock nao pode usar em BG
-    if (m_spellInfo->Id == 83357 || m_spellInfo->Id == 83361 || m_spellInfo->Id == 83363 || m_spellInfo->Id == 83365    // Novas Traps
+    // Novas Traps, Portals e Pedra de Warlock nao pode usar em BG/Arena
+    if (m_spellInfo->Id == 83357 || m_spellInfo->Id == 83361 || m_spellInfo->Id == 83363 || m_spellInfo->Id == 83365    // Launch Traps
         || m_spellInfo->Id == 61993 || m_spellInfo->Id == 53142 || m_spellInfo->Id == 11419 || m_spellInfo->Id == 32266 /* ritual of summoning, portal dalaran, portal darnassus, portal exodar */
         || m_spellInfo->Id == 11416 || m_spellInfo->Id == 33691 || m_spellInfo->Id == 10059 || m_spellInfo->Id == 49360 /* portal ironforge, portal shattrath, portal stormwind, portal theramore */
         || m_spellInfo->Id == 11417 || m_spellInfo->Id == 35717 || m_spellInfo->Id == 32267 || m_spellInfo->Id == 49361 /* portal orgrimmar, shattrath, silvermoon, stonard */
