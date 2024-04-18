@@ -1188,6 +1188,9 @@ void World::LoadConfigSettings(bool reload)
     // Battleborn
     _int_configs[CONFIG_RESETCDSAOMATARBOSS]                        = sConfigMgr->GetOption<uint32>("ResetCDsAoMatarBoss", 1);
     _int_configs[CONFIG_ENABLE_FAKE_WHO_ON_ARENA]                   = sConfigMgr->GetOption<uint32>("Arena.FakeWho", 1);
+    _float_configs[CONFIG_ARENA_2V2_MULTIPLIER]                     = sConfigMgr->GetOption<float>("Arena.2v2.ArenaPointsMulti", 1.00f);
+    _float_configs[CONFIG_ARENA_3V3_MULTIPLIER]                     = sConfigMgr->GetOption<float>("Arena.3v3.ArenaPointsMulti", 1.00f);
+    _int_configs[CONFIG_WOTLKCLASSIC_ARENA_POINTS_CALC]             = sConfigMgr->GetOption<uint32>("Arena.WotlkClassicArenaPoints", 1);
 
     _bool_configs[CONFIG_OFFHAND_CHECK_AT_SPELL_UNLEARN]            = sConfigMgr->GetOption<bool>("OffhandCheckAtSpellUnlearn", true);
     _int_configs[CONFIG_CREATURE_STOP_FOR_PLAYER]                   = sConfigMgr->GetOption<uint32>("Creature.MovingStopTimeForPlayer", 3 * MINUTE * IN_MILLISECONDS);
