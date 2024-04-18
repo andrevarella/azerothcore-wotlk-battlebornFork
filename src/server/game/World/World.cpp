@@ -1187,6 +1187,7 @@ void World::LoadConfigSettings(bool reload)
 
     // Battleborn
     _int_configs[CONFIG_RESETCDSAOMATARBOSS]                        = sConfigMgr->GetOption<uint32>("ResetCDsAoMatarBoss", 1);
+    _int_configs[CONFIG_ENABLE_FAKE_WHO_ON_ARENA]                   = sConfigMgr->GetOption<uint32>("Arena.FakeWho", 1);
 
     _bool_configs[CONFIG_OFFHAND_CHECK_AT_SPELL_UNLEARN]            = sConfigMgr->GetOption<bool>("OffhandCheckAtSpellUnlearn", true);
     _int_configs[CONFIG_CREATURE_STOP_FOR_PLAYER]                   = sConfigMgr->GetOption<uint32>("Creature.MovingStopTimeForPlayer", 3 * MINUTE * IN_MILLISECONDS);
