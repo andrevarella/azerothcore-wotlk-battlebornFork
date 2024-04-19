@@ -2402,6 +2402,9 @@ void Unit::CalcAbsorbResist(DamageInfo& dmgInfo, bool Splited)
 
             CleanDamage cleanDamage = CleanDamage(splitted, 0, BASE_ATTACK, MELEE_HIT_NORMAL);
             Unit::DealDamage(attacker, caster, splitted, &cleanDamage, DIRECT_DAMAGE, schoolMask, (*itr)->GetSpellInfo(), false);
+
+            // break 'Fear' and similar auras
+            //caster->ProcDamageAndSpellFor(true, attacker, PROC_FLAG_TAKEN_SPELL_MAGIC_DMG_CLASS_NEG, PROC_EX_NORMAL_HIT, BASE_ATTACK, (*itr)->GetSpellInfo(), splitted, 0, 0, 0, 0);
         }
 
         // We're going to call functions which can modify content of the list during iteration over it's elements
