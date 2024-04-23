@@ -773,10 +773,7 @@ void BattlegroundQueue::BattlegroundQueueUpdate(uint32 diff, BattlegroundTypeId 
 
     sScriptMgr->OnQueueUpdate(this, diff, bgTypeId, bracket_id, arenaType, isRated, arenaRating);
 
-    // solo queue 3v3 - times que nao sao o standard, nao começam a arena enqnt tiverem no queue
-    const auto standardArenaType = { ARENA_TYPE_2v2, ARENA_TYPE_3v3/*, ARENA_TYPE_5v5*/ }; // fix crash solo queue
-    bool isStandardArenaType = std::find(std::begin(standardArenaType), std::end(standardArenaType), arenaType) != std::end(standardArenaType);
-    if (!isStandardArenaType)
+    if (arenaType == 4 || arenaType == ARENA_TYPE_5v5)
         return;
 
     m_SelectionPools[TEAM_ALLIANCE].Init();
