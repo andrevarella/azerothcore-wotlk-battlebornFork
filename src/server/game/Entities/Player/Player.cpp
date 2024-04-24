@@ -15414,6 +15414,93 @@ void Player::ActivateSpec(uint8 spec)
     sScriptMgr->OnAfterSpecSlotChanged(this, GetActiveSpec());
 }
 
+void Player::ReloadActionBar(uint8 spec)
+{
+    // interrupt currently casted spell just in case
+    if (IsNonMeleeSpellCast(false))
+        InterruptNonMeleeSpells(false);
+
+    // remove pet, it will be resummoned later
+    if (Pet* pet = GetPet())
+        RemovePet(pet, PET_SAVE_NOT_IN_SLOT);
+
+    // remove other summoned units and clear reactives
+    ClearAllReactives();
+    UnsummonAllTotems();
+    RemoveAllControlled();
+
+    // let client clear his current Actions
+    //SendActionButtons(1); eh necessario ?
+    uint8 oldSpec = GetActiveSpec();
+
+    std::unordered_set<uint32> removedSpecAuras;
+
+    // remove glyph auras
+    for (uint8 slot = 0; slot < MAX_GLYPH_SLOT_INDEX; ++slot)
+        if (uint32 glyphId = m_Glyphs[GetActiveSpec()][slot])
+            if (GlyphPropertiesEntry const* glyphEntry = sGlyphPropertiesStore.LookupEntry(glyphId))
+            {
+                RemoveAurasDueToSpell(glyphEntry->SpellId);
+                removedSpecAuras.insert(glyphEntry->SpellId);
+            }
+
+    // Patch 3.2.0: Switching spec removes paladins spell Righteous Fury (25780)
+    if (IsClass(CLASS_PALADIN, CLASS_CONTEXT_ABILITY))
+        RemoveAurasDueToSpell(25780);
+
+
+    // Remove talented single target auras at other targets
+    AuraList& scAuras = GetSingleCastAuras();
+    for (AuraList::iterator iter = scAuras.begin(); iter != scAuras.end();)
+    {
+        Aura* aura = *iter;
+        if (!HasActiveSpell(aura->GetId()) && !HasTalent(aura->GetId(), GetActiveSpec()) && !aura->GetCastItemGUID())
+        {
+            aura->Remove();
+            iter = scAuras.begin();
+        }
+        else
+            ++iter;
+    }
+
+    /* // Pode afetar auras dos talentos, essa função é chamada após dar learn nos talents
+    // Remove auras triggered/activated by talents/glyphs
+    // Mostly explicit casts in dummy aura scripts
+    if (!removedSpecAuras.empty())
+    {
+        for (AuraMap::iterator iter = m_ownedAuras.begin(); iter != m_ownedAuras.end();)
+        {
+            Aura* aura = iter->second;
+            if (SpellInfo const* triggeredByAuraSpellInfo = aura->GetTriggeredByAuraSpellInfo())
+            {
+                if (removedSpecAuras.find(triggeredByAuraSpellInfo->Id) != removedSpecAuras.end())
+                {
+                    RemoveOwnedAura(iter);
+                    continue;
+                }
+            }
+            ++iter;
+        }
+    }*/
+
+    // load them asynchronously - atualiza a ActionBar
+    {
+        CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_CHARACTER_ACTIONS_SPEC);
+        stmt->SetData(0, GetGUID().GetCounter());
+        stmt->SetData(1, m_activeSpec);
+
+        WorldSession* mySess = GetSession();
+        mySess->GetQueryProcessor().AddCallback(CharacterDatabase.AsyncQuery(stmt)
+            .WithPreparedCallback([mySess](PreparedQueryResult result)
+            {
+                 // safe callback, we can't pass this pointer directly
+                 // in case player logs out before db response (player would be deleted in that case)
+                 if (Player* thisPlayer = mySess->GetPlayer())
+                     thisPlayer->LoadActions(result);
+            }));
+    }
+}
+
 void Player::LoadActions(PreparedQueryResult result)
 {
     if (result)
