@@ -182,6 +182,9 @@ bool ArenaSpectator::HandleSpectatorSpectateCommand(ChatHandler* handler, std::s
     player->SetEntryPoint();
     player->TeleportTo(spectate->GetMapId(), spectate->GetPositionX(), spectate->GetPositionY(), z, spectate->GetOrientation(), TELE_TO_GM_MODE);
 
+    //handler->PSendSysMessage("Comandos disponíveis: .sp <nome do player> \nEnquanto spectator: \n/g .leave (para sair do spectate) \n/g .sp <nome do player> (para ver o PoV) \n/g .sp <nome do player> (para sair do PoV)");
+    handler->PSendSysMessage("Comandos disponíveis: .sp <nome do player> \n*Enquanto spectator: \n.leave (para sair do spectate) \n.sp <nome do player> (para ver o PoV) \n.sp <nome do player> (para sair do PoV)");
+
     return true;
 }
 
