@@ -205,6 +205,7 @@ void Arena::CheckWinConditions()
 
 void Arena::EndBattleground(TeamId winnerTeamId)
 {
+    //if (isRated() && GetArenaType() <= 3)
     if (isRated())
     {
         uint32 startDelay = GetStartDelayTime();
@@ -383,6 +384,13 @@ void Arena::EndBattleground(TeamId winnerTeamId)
         loserArenaTeam->SaveToDB();
         loserArenaTeam->NotifyStatsChanged();
     }
+
+
+    /*
+    else if (isRated() && GetArenaType() == 4 || GetArenaType() == ARENA_TYPE_5v5)
+    if (winnerTeamId)
+    else
+    */
 
     // end battleground
     Battleground::EndBattleground(winnerTeamId);

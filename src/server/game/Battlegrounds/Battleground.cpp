@@ -48,6 +48,9 @@
 #include "WorldPacket.h"
 #include "WorldStatePackets.h"
 
+#include "ArenaTeamMgr.h"
+#include "BattlegroundQueue.h"
+
 namespace Acore
 {
     class BattlegroundChatBuilder
@@ -237,6 +240,28 @@ Battleground::~Battleground()
 
     for (auto const& itr : PlayerScores)
         delete itr.second;
+
+    /*
+    // Cleanup temp arena teams for solo 3v3
+    if (isArena() && isRated() && GetArenaType() >= 4) // || GetArenaType() == ARENA_TEAM_5v5
+    {
+        LOG_ERROR("solo3v3", "É arena rated e type == 4 ou 5v5");
+
+        ArenaTeam* tempAlliArenaTeam = sArenaTeamMgr->GetArenaTeamById(GetArenaTeamIdForTeam(TEAM_ALLIANCE));
+        ArenaTeam* tempHordeArenaTeam = sArenaTeamMgr->GetArenaTeamById(GetArenaTeamIdForTeam(TEAM_HORDE));
+
+        if (tempAlliArenaTeam && tempAlliArenaTeam->GetId() >= MAX_ARENA_TEAM_ID)
+        {
+            sArenaTeamMgr->RemoveArenaTeam(tempAlliArenaTeam->GetId());
+            delete tempAlliArenaTeam;
+        }
+
+        if (tempHordeArenaTeam && tempHordeArenaTeam->GetId() >= MAX_ARENA_TEAM_ID)
+        {
+            sArenaTeamMgr->RemoveArenaTeam(tempHordeArenaTeam->GetId());
+            delete tempHordeArenaTeam;
+        }
+    }*/
 }
 
 void Battleground::Update(uint32 diff)
